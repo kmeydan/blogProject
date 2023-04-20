@@ -4,6 +4,7 @@ namespace Straßenkarte.Models.ViewModels
 {
 	public class AdminUserViewModel
 	{
+		public string Id{ get; set; }
 		[Display(Name = "E-Posta")]
 		[Required(ErrorMessage = "{0} alanını boş bırakmayınız.")]
 		[EmailAddress(ErrorMessage = "Lütfen geçerli bir {0} giriniz!")]
@@ -18,6 +19,7 @@ namespace Straßenkarte.Models.ViewModels
 		[Display(Name = "Parola Tekrarı")]
 		[Required(ErrorMessage = "{0} alanını boş bırakmayınız.")]
 		[DataType(DataType.Password)]
+		[Compare(nameof(Password),ErrorMessage = "Parolalar uyuşmuyor")]
 		public string RePassword { get; set; }
 		public string Category { get; set; }
 		[Display(Name = "Telefon Numarası")]

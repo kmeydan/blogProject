@@ -37,40 +37,49 @@
 						</tr>
 						</thead>
 						<tbody>
-						@foreach (var item in Model.users)
+						@if (Model.users!=null)
 						{
-							<tr>
-								<td>
-									<div class="form-check form-check-flat mt-0">
-										<label class="form-check-label">
-											<input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i>
-										</label>
-									</div>
-								</td>
-								<td>
-									<div class="d-flex ">
-										<img src="/images/faces/face1.jpg" alt="">
-										<div>
-											<a asp-action="UserUpdate" asp-controller="Admin" asp-route-userId="@item.Id" class="text-decoration-none"><h6 class="text-primary"> @item.UserName</h6></a>
-											<p>Admin</p>
+							@foreach (var item in Model.users)
+							{
+								<tr>
+									<td>
+										<div class="form-check form-check-flat mt-0">
+											<label class="form-check-label">
+												<input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i>
+											</label>
 										</div>
-									</div>
-								</td>
-								<td>
-									<h6>@item.Email</h6>
-								</td>
+									</td>
+									<td>
+										<div class="d-flex ">
+											<img src="/images/faces/face1.jpg" alt="">
+											<div>
+												<a asp-action="UserUpdate" asp-controller="Admin" asp-route-userId="@item.Id" class="text-decoration-none"><h6 class="text-primary"> @item.UserName</h6></a>
+												<p>Admin</p>
+											</div>
+										</div>
+									</td>
+									<td>
+										<h6>@item.Email</h6>
+									</td>
 
-								<td>
-									<div>
-										<a href="#" class="text-success"><i class="mdi mdi-account-check fs-5"></i></a>
-										<a href="#" class="badge badge-opacity-danger"><i class="mdi mdi-account-off fs-5"></i></a>
-									</div>
-								</td>
-								<td>
-									<span class="badge badge-opacity-warning">@item.PhoneNumber</span>
-								</td>
-							</tr>
+									<td>
+										<div>
+											<a href="#" class="text-success"><i class="mdi mdi-account-check fs-5"></i></a>
+											<a href="#" class="badge badge-opacity-danger"><i class="mdi mdi-account-off fs-5"></i></a>
+										</div>
+									</td>
+									<td>
+										<span class="badge badge-opacity-warning">@item.PhoneNumber</span>
+									</td>
+								</tr>
+							}
 						}
+						else
+						{
+							<p>Herhangi Bir Veri Getirilemedi</p>
+
+						}
+						
 
 						</tbody>
 

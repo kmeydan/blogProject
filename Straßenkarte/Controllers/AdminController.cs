@@ -446,7 +446,6 @@ namespace Straßenkarte.Controllers
 				return View(model);
 			}
 
-			result.Email = model.Email;
 			result.PhoneNumber= model.PhoneNumber;
 			result.UserName = model.Username;
 			
@@ -484,8 +483,10 @@ namespace Straßenkarte.Controllers
 		//hata dönüyor düzenle
 		[HttpPost]
 		public async Task<IActionResult> DeleteUser(AdminUserViewModel model)
+
 		{
-			var result = await userManager.FindByEmailAsync(model.Email);
+			var mail = model.Email.Trim();
+			var result = await userManager.FindByEmailAsync(mail);
 			if (result==null)
 			{
 				ModelState.AddModelError("","E mail bulunamadı.");

@@ -87,6 +87,8 @@
 															</tr>
 														</thead>
 														<tbody>
+														@if (Model.users!=null)
+														{
 															@foreach (var item in Model.users)
 															{
 																<tr>
@@ -109,10 +111,10 @@
 																	<td>
 																		<h6>@item.Email</h6>
 																	</td>
-																	
+
 																	<td>
 																		<div>
-																			<a href="#"  class="text-success"><i class="mdi mdi-account-check fs-5"></i></a>
+																			<a href="#" class="text-success"><i class="mdi mdi-account-check fs-5"></i></a>
 																			<a href="#" onclick="confirmDelete()" class="badge badge-opacity-danger"><i class="mdi mdi-account-off fs-5"></i></a>
 																		</div>
 																	</td>
@@ -121,7 +123,15 @@
 																	</td>
 																</tr>
 															}
-															
+														}
+														else
+														{
+																<p>Herhangi Bir Veri Getirilemedi</p>
+
+														}
+
+														
+
 														</tbody>
 														
 													</table>
