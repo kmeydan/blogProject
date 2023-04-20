@@ -1,0 +1,96 @@
+﻿@model TodoViewModels
+
+@{
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+}
+
+@Html.Partial("TotalPartial.cshtml")
+
+<div class="container mt-5">
+	<div class="col-lg-12 justify-content-between grid-margin stretch-card">
+
+		<div class="card">
+			<div>
+				<button class="btn btn-primary">
+					<a class="nav-link text-white" asp-action="CreateTodo">Todo Oluştur</a>
+				</button>
+			</div>
+
+			<div class="card-body">
+				<h4 class="card-title">TodoList </h4>
+				<div class="table-responsive text-center">
+					<table class="table table-striped table-responsive-lg">
+						<thead>
+							<tr>
+								<th class="col-1">
+									Todo Id
+								</th>
+
+								<th class="col-3">
+									Todo Açıklama
+								</th>
+								<th class="col-2">
+									Todo Oluşturulma Tarihi
+								</th>
+								<th class="col-2">
+									Todo Son Tarih
+								</th>
+								<th class="col-2">
+									Todo Aksiyon
+								</th>
+
+
+
+							</tr>
+						</thead>
+						<tbody>
+							@if (Model.Todolist != null)
+							{
+								@foreach (var todo in Model.Todolist)
+								{
+
+									<tr>
+										<td>
+											@todo.Id
+										</td>
+										<td>
+											<p>@todo.Description</p>
+										</td>
+										<td>
+											<p>@todo.CreateDateTime.ToShortDateString()</p>
+										</td>
+										<td>
+											<p class="text-danger">@todo.LastDateTime.ToShortDateString()</p>
+										</td>
+										<td>
+											<a asp-controller="Admin" asp-action="UpdateTodo" asp-route-id="@todo.Id">@todo.TodoAction</a>
+										</td>
+
+									</tr>
+
+
+
+								}
+
+
+							}
+
+
+
+
+						</tbody>
+
+					</table>
+					@if (Model.Todolist == null)
+					{
+						<h1 class="mt-5"> Veriler Getirilemedi </h1>
+
+					}
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+	<ul class="nav">
+		<li class="nav-item">
+			<a class="nav-link" asp-action="Index" asp-controller="admin">
+				<i class="mdi mdi-grid-large menu-icon"></i>
+				<span class="menu-title">Dashboard</span>
+			</a>
+		</li>
+		<li class="nav-item nav-category">Blog Yonetimi</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+				<i class="menu-icon mdi mdi-floor-plan"></i>
+				<span class="menu-title">Blog Yonetimi</span>
+				<i class="menu-arrow"></i> 
+			</a>
+			<div class="collapse" id="ui-basic">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"> <a class="nav-link" asp-controller="Admin" asp-action="BlogCreate">Blog Ekle</a></li>
+					<li class="nav-item"> <a class="nav-link" asp-controller="Admin" asp-action="Bloglar">Bloglar</a></li>
+					<li class="nav-item"> <a class="nav-link" asp-action="CategoryCreate" asp-controller="Admin">Kategori Ekle</a></li>
+				</ul>
+	            
+			</div>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+				<i class="menu-icon mdi mdi-layers-outline"></i>
+				<span class="menu-title">Eklentiler</span>
+				<i class="menu-arrow"></i>
+			</a>
+			<div class="collapse" id="charts">
+				<ul class="nav flex-column sub-menu">
+					<li class="nav-item"> <a class="nav-link" asp-action="TodoList" method="get">TodoList</a></li>
+				</ul>
+			</div>
+		</li>
+
+	        
+          
+          
+	</ul>
+</nav>
+
+

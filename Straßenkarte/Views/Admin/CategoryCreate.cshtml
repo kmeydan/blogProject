@@ -1,0 +1,72 @@
+﻿@model NewCategoryViewModel
+@{
+	ViewData["Title"] = "CategoryCreate";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Html.Partial("TotalPartial")
+<div class="container mt-5">
+
+	<div class="card col-12">
+		<div class="card-body">
+			<h4 class="card-title">Kategori Ekle</h4>
+
+			<form class="forms-sample" asp-controller="Admin" asp-action="CategoryCreate" method="post">
+				<div class="form-group">
+					<input type="hidden" class="form-control" asp-for="Id">
+					<label asp-for="CategoryName"></label>
+					<input asp-for="CategoryName" class="form-control" value="@Model.CategoryName">
+				</div>
+
+				<button type="submit" class="btn btn-primary me-2">Kaydet</button>
+				<button class="btn btn-light" asp-action="Bloglar">İptal</button>
+			</form>
+
+		</div>
+	</div>
+	<div class="card col-12 mt-4">
+		<div class="card-body">
+			<div class="table-responsive text-center">
+				<table class="table table-striped table-responsive-lg">
+					<thead>
+					<tr>
+						<th class="col-6">
+							Kategoriler
+						</th>
+						<th class="col-6">
+							Düzenle
+						</th>
+
+					</tr>
+					</thead>
+					<tbody>
+					<form asp-action="CategoryUpdate" method="get">
+					@foreach (var blog in Model.Categories)
+					{
+						<tr>
+
+							<td>
+								<h3>@blog.CategoryName</h3>
+							</td>
+
+							<td>
+
+								<button class="btn btn-success" asp-controller="Admin" asp-action="CategoryUpdate" asp-route-id="@blog.CategoryId" method="get">Düzenle</button>
+
+							</td>
+
+						</tr>
+					}
+					</form>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+

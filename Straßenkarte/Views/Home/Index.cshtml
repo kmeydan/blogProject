@@ -1,0 +1,111 @@
+﻿@using Straßenkarte.Enitites;
+@model BlogsViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+    
+}
+
+
+<div class="main-banner header-text">
+    <div class="container-fluid">
+        <div class="owl-banner owl-carousel ">
+            @foreach (var item in Model.Blogs)
+            {
+                if (DateTime.Now<item.CreateDate.AddDays(3) || item.CreateDate<DateTime.Now )
+                {
+                    <div class="item container-fluid" style="height:400px">
+                    <img src="/Img/@item.ImageUrl" style="height:400px">
+                    <div class="item-content">
+                        <div class="main-content">
+                            <div class="meta-category">
+                                <a asp-controller="Home" asp-action="PostDetail" asp-route-id="@item.Id"><span>@item.BlogTitle</span></a>  
+                            </div>
+                            <ul class="post-info">
+                                <li><a href="#">Admin</a></li>
+                                <li><a href="#">@((int)(DateTime.Now - item.CreateDate).TotalDays) Gün önce yayınlandı.</a></li>
+                                <li><a href="#">@item.Comments</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                }
+                
+            }
+            </div>
+    </div>
+</div>
+<!-- Banner Ends Here -->
+
+<section class="blog-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="all-blog-posts">
+                    <div class="row">
+                        @foreach (var item in Model.Blogs)
+                        {
+                            <div class="col-lg-12">
+                                <div class="blog-post">
+                                    <div class="blog-thumb">
+                                        <img src="/Img/@item.ImageUrl" alt="">
+                                    </div>
+                                    <div class="down-content">
+                                        <span>Healthy</span>
+                                        <a asp-action="PostDetail" asp-route-id="@item.Id"><h4>@item.BlogTitle</h4></a>
+                                        <ul class="post-info">
+                                            <li><a href="#">Admin</a></li>
+                                            <li><a href="#">@item.CreateDate</a></li>
+                                        </ul>
+                                        @if (item.BlogDescription.Length>200)
+                                        {
+
+                                            @Html.Raw(item.BlogDescription.Substring(0,199))
+                                            <a asp-controller="Home" asp-action="PostDetail" asp-route-id="@item.Id">Devamı için tıklayınız</a>
+                                            
+                                        }
+
+                                        else
+                                        {
+                                            @Html.Raw(item.BlogDescription)
+                                        }
+
+                                        <div class="post-options">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <ul class="post-tags">
+                                                        <li><i class="fa fa-tags"></i></li>
+                                                        <li><a href="#">Best Templates</a>,</li>
+                                                        <li><a href="#">TemplateMo</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-6">
+                                                    <ul class="post-share">
+                                                        <li><i class="fa fa-share-alt"></i></li>
+                                                        <li><a href="#">Facebook</a>,</li>
+                                                        <li><a href="#">Twitter</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                        
+                        <div class="col-lg-12">
+                            <div class="main-button">
+                                <a asp-action="AllBlog">Tüm Bloglar</a>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("SideBarPartial.cshtml")
+        </div>
+    </div>
+</section>
+

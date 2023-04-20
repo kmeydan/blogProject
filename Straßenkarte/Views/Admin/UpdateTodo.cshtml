@@ -1,0 +1,47 @@
+﻿@model TodoViewModels
+@{
+    ViewData["Title"] = "UpdateTodo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Html.Partial("TotalPartial.cshtml")
+<div class="container mt-5">
+
+	<div class="row">
+		<div class="col-md-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Yeni Todo Girişi</h4>
+					<form asp-action="UpdateTodo" method="post" class="d-grid gap-2 " enctype="multipart/form-data">
+						<div asp-validation-summary="All" class="text-danger"></div>
+
+						<div class="form-floating mb-3">
+							<input type="hidden" asp-for="@Model.Id"/>
+							<input class="form-control" asp-for="@Model.TodoAction">
+							<label asp-for="@Model.TodoAction"></label>
+							<span asp-validation-for="@Model.TodoAction" class="text-danger"></span>
+						</div>
+						<div class="form-floating">
+							<input class="form-control" asp-for="@Model.TodoDescription">
+							<label asp-for="@Model.TodoDescription"></label>
+							<span asp-validation-for="@Model.TodoDescription" class="text-danger"></span>
+
+						</div>
+						<div class="form-label my-3">
+							<label asp-for="LastDateTime" class="mx-1">En Geç Tarih</label>
+							<input asp-for="LastDateTime" type="date" value="@DateTime.Now" class="mx-3 form-check-label"/>
+							<span asp-validation-for="LastDateTime" class="text-danger"></span>
+
+						</div>
+
+						<div class="mt-2">
+							<button type="submit" class="btn btn-primary me-2" asp-action="UpdateTodo" method="post">Güncelle</button>
+							<button class="btn btn-light" asp-action="TodoList">Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

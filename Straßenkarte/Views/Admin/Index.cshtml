@@ -1,0 +1,236 @@
+﻿@model AdminBlogViewModel
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Html.Partial("TotalPartial.cshtml")
+
+<div class="main-panel">
+	<div class="content-wrapper">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="home-tab">
+					<div class="tab-content tab-content-basic">
+						<div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+							<div class="row">
+								@if (TempData["Message"] != null)
+								{
+									<div class="alert alert-@TempData["MessageType"]">
+										<p>@TempData["Message"]</p>
+									</div>
+								}
+								<div class="col-sm-12">
+									<div class="statistics-details d-flex align-items-center justify-content-between">
+										<div>
+											<p class="statistics-title">Abone Olan</p>
+											<h3 class="rate-percentage">32.53%</h3>
+											<p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p>
+										</div>
+										<div>
+											<p class="statistics-title">Sayfa Görüntülenmesi</p>
+											<h3 class="rate-percentage">7,682</h3>
+											<p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p>
+										</div>
+										<div>
+											<p class="statistics-title">Ortalama Sitede Geçirilen Süre</p>
+											<h3 class="rate-percentage">2m:35s</h3>
+											<p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+										</div>
+										<div class="d-none d-md-block">
+											<p class="statistics-title">Avg. Time on Site</p>
+											<h3 class="rate-percentage">2m:35s</h3>
+											<p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
+										</div>
+										<div class="d-none d-md-block">
+											<p class="statistics-title">New Sessions</p>
+											<h3 class="rate-percentage">68.8</h3>
+											<p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p>
+										</div>
+										<div class="d-none d-md-block">
+											<p class="statistics-title">Avg. Time on Site</p>
+											<h3 class="rate-percentage">2m:35s</h3>
+											<p class="text-success d-flex"><i class="mdi mdi-menu-down"></i><span>+0.8%</span></p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="row flex-grow">
+									<div class="col-12 grid-margin stretch-card">
+										<div class="card card-rounded">
+											<div class="card-body">
+												<div class="d-sm-flex justify-content-between align-items-start">
+													<div>
+														<h4 class="card-title card-title-dash">Pending Requests</h4>
+														<p class="card-subtitle card-subtitle-dash">Yeni Kullanıcılar</p>
+													</div>
+													<div>
+														<button class="btn btn-primary btn-lg text-white mb-0 me-0" type="button"><a class="text-decoration-none text-white" href="/admin/createuser"><i class="mdi mdi-account-plus"></i> Yeni Kullanıcı Ekle</a></button>
+													</div>
+												</div>
+												<div class="table-responsive  mt-1">
+													<table class="table select-table justify-content-arround">
+														<thead>
+															<tr>
+																<th>
+																	<div class="form-check form-check-flat mt-0">
+																		<label class="form-check-label">
+																			<input type="checkbox" id="ust-checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i>
+																		</label>
+																	</div>
+																</th>
+																<th>Kullanıcılar</th>
+																<th>E-Posta Adresi</th>
+																<th>Aktif / Pasif</th>
+																<th>Telefon Numarası</th>
+															</tr>
+														</thead>
+														<tbody>
+															@foreach (var item in Model.users)
+															{
+																<tr>
+																	<td>
+																		<div class="form-check form-check-flat mt-0">
+																			<label class="form-check-label">
+																				<input type="checkbox" class="form-check-input" aria-checked="false"><i class="input-helper"></i>
+																			</label>
+																		</div>
+																	</td>
+																	<td>
+																		<div class="d-flex ">
+																			<img src="/images/faces/face1.jpg" alt="">
+																			<div>
+																				<a asp-action="UserUpdate" asp-controller="Admin" asp-route-userId="@item.Id" class="text-decoration-none"><h6 class="text-primary"> @item.UserName</h6></a>
+																				<p>Admin</p>
+																			</div>
+																		</div>
+																	</td>
+																	<td>
+																		<h6>@item.Email</h6>
+																	</td>
+																	
+																	<td>
+																		<div>
+																			<a href="#"  class="text-success"><i class="mdi mdi-account-check fs-5"></i></a>
+																			<a href="#" onclick="confirmDelete()" class="badge badge-opacity-danger"><i class="mdi mdi-account-off fs-5"></i></a>
+																		</div>
+																	</td>
+																	<td>
+																		<span class="badge badge-opacity-warning">@item.PhoneNumber</span>
+																	</td>
+																</tr>
+															}
+															
+														</tbody>
+														
+													</table>
+													<div class="list align-items-center pt-3">
+														<div class="wrapper w-100">
+															<p class="mb-0">
+																<a asp-action="Customers" class="fw-bold text-primary">Tümünü Gör <i class="mdi mdi-arrow-right ms-2"></i></a>
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="row flex-grow">
+									<div class="col-md-6 col-lg-6 grid-margin stretch-card">
+										<div class="card card-rounded">
+											<div class="card-body card-rounded">
+												<h4 class="card-title  card-title-dash">Yapılacaklar Listesi</h4>
+												@foreach (var item in Model.Todo)
+												{
+													<div class="list align-items-center border-bottom py-2">
+														<div class="wrapper w-100">
+															<p class="mb-2 font-weight-medium">
+																@item.Description
+															</p>
+															<div class="d-flex justify-content-between align-items-center">
+																<div class="d-flex align-items-center">
+																	<i class="mdi mdi-calendar text-muted me-1"></i>
+																	<p class="mb-0 text-small text-muted">@item.LastDateTime.ToLongDateString()</p>
+																</div>
+																<p class="mb-0 text-small text-muted">Son Teslim Tarihi</p>
+															</div>
+														</div>
+													</div>
+												}
+
+												<div class="list align-items-center pt-3">
+													<div class="wrapper w-100">
+														<p class="mb-0">
+															<a href="#" class="fw-bold text-primary">Tümünü Gör <i class="mdi mdi-arrow-right ms-2"></i></a>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-6 grid-margin stretch-card">
+										<div class="card card-rounded">
+											<div class="card-body">
+												<div class="d-flex align-items-center justify-content-between mb-3">
+													<h4 class="card-title card-title-dash">Son Yapılan İşlemler</h4>
+													<p class="mb-0">@Model.blogs.Count adet tamamlandı.</p>
+												</div>
+												<ul class="bullet-line-list">
+													@foreach (var item in Model.blogs)
+													{
+
+
+														<li>
+															<div class="d-flex justify-content-between">
+																<div>
+																	<span class="text-light-green">Admin </span>
+																	<span><a asp-action="BlogUpdate" class="text-decoration-none text-danger" asp-route-id="@item.Id">@item.BlogTitle</a> </span> İsimli Blog oluşturdu.
+
+																</div>
+																<p>@item.CreateDate</p>
+															</div>
+														</li>
+													}
+
+
+
+												</ul>
+
+												<div class="list align-items-center pt-3">
+													<div class="wrapper w-100">
+														<p class="mb-0">
+															<a href="#" class="fw-bold text-primary">Tümünü Gör<i class="mdi mdi-arrow-right ms-2"></i></a>
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@section Scripts
+	{
+	<script>
+		$(document).ready(function () {
+			// üstteki checkbox'a tıklanınca
+			$("#ust-checkbox").click(function () {
+				// alttaki tüm checkboxları seç
+				$("input[type='checkbox']").prop('checked', $(this).prop('checked'));
+			});
+		});
+	</script>
+}
+
+
+
+
